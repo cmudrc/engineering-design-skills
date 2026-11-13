@@ -1,0 +1,4 @@
+interface:
+  display_name: "Engineering Design Process"
+  short_description: "Plan and guide an iterative engineering design process"
+  default_prompt: "Use $engineering-design-process to help with my engineering design problem."

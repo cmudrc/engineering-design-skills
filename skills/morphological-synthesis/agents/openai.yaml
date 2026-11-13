@@ -1,0 +1,4 @@
+interface:
+  display_name: "Morphological Synthesis"
+  short_description: "Combine solution principles into engineering concepts"
+  default_prompt: "Use $morphological-synthesis to help with my engineering design problem."

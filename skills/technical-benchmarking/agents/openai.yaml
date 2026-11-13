@@ -1,0 +1,4 @@
+interface:
+  display_name: "Technical Benchmarking"
+  short_description: "Compare engineering solutions using traceable evidence"
+  default_prompt: "Use $technical-benchmarking to help with my engineering design problem."
