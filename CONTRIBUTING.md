@@ -13,7 +13,9 @@ Each skill should specify:
 5. **Quality checks:** likely method failures, assumptions, and checks on the artifact.
 6. **Continuation:** what the result enables and which uncertainty should be addressed next.
 
-Keep the entry point short and directly link resources. Use lowercase hyphenated directory names that match the frontmatter `name`. Include `name`, `description`, and `license: MIT` in the YAML frontmatter. Optional product-specific interface metadata belongs in `agents/`.
+Keep the entry point short and directly link resources. Use lowercase hyphenated directory names that match the frontmatter `name`. Include `name`, `description`, and `license: MIT` in the YAML frontmatter.
+
+Keep skill directories platform neutral. Define discovery names and descriptions in `SKILL.md`; keep host-specific presentation and invocation configuration outside the distributed skills. The validator rejects `agents/` configuration inside skill directories.
 
 ## Evidence and examples
 

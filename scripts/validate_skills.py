@@ -53,21 +53,8 @@ def validate(skill):
                 errors.append(f"{document.relative_to(ROOT)}: resource escapes the self-contained skill: {target}")
             elif not resolved.exists():
                 errors.append(f"{document.relative_to(ROOT)}: missing local resource: {target}")
-    interface_file = skill / "agents" / "openai.yaml"
-    if interface_file.exists():
-        try:
-            config = yaml.safe_load(interface_file.read_text(encoding="utf-8"))
-            interface = config.get("interface", {}) if isinstance(config, dict) else {}
-            if not isinstance(interface, dict):
-                interface = {}
-            short = interface.get("short_description", "")
-            if not isinstance(short, str) or not 25 <= len(short) <= 64:
-                errors.append(f"{skill.name}: interface short_description must be 25–64 characters")
-            prompt = interface.get("default_prompt", "")
-            if not isinstance(prompt, str) or f"${name}" not in prompt:
-                errors.append(f"{skill.name}: interface default_prompt must name the skill")
-        except yaml.YAMLError as exc:
-            errors.append(f"{skill.name}: invalid interface YAML: {exc}")
+    if (skill / "agents").exists():
+        errors.append(f"{skill.name}: keep host-specific agents/ configuration outside the portable skill directory")
     return errors
 
 
@@ -81,7 +68,7 @@ def main():
         print(error, file=sys.stderr)
     if errors:
         return 1
-    print(f"Validated {len(skills)} skills: metadata, local resource links, and interface metadata.")
+    print(f"Validated {len(skills)} skills: frontmatter, local resource links, and platform-neutral structure.")
     print("This check does not evaluate agent behavior or engineering validity.")
     return 0
 

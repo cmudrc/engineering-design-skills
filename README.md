@@ -19,7 +19,7 @@ The process skill provides a top-level entry point. Each method skill also works
 
 ## Use
 
-The skills follow the [Agent Skills format](https://agentskills.io/specification). Each directory under `skills/` contains a `SKILL.md` entry point, an output template in `assets/`, and a worked example in `references/`. Optional `agents/openai.yaml` files provide Codex interface metadata. No engineering solver, API key, or proprietary application is required for the starter workflows.
+The skills follow the [Agent Skills format](https://agentskills.io/specification). Each directory under `skills/` contains a `SKILL.md` entry point, an output template in `assets/`, and a worked example in `references/`. The skill content is platform neutral; each host supplies its own installation, presentation, and invocation settings. No engineering solver, API key, or proprietary application is required for the starter workflows.
 
 For a first inspection, open a skill's `SKILL.md` and follow its instructions in your agent environment. For an environment that discovers skills from a local skills directory, copy the **complete skill directory**, including its `assets/` and `references/`, to that location. Discovery and invocation syntax depend on the host. The method skills do not require their siblings to be installed.
 
@@ -43,7 +43,7 @@ python3 -m pip install -r requirements-dev.txt
 python3 scripts/validate_skills.py
 ```
 
-The validator checks skill metadata, resource links, and optional interface metadata. Behavioral evaluation cases are described in [evals/README.md](evals/README.md); they require an actual agent run and are not implied by structural validation.
+The validator checks skill frontmatter and local resource links, and rejects host-specific `agents/` configuration inside skill directories. Behavioral evaluation cases are described in [evals/README.md](evals/README.md); they require an actual agent run and are not implied by structural validation.
 
 ## License
 

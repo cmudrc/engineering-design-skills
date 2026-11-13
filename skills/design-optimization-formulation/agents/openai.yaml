@@ -1,4 +1,0 @@
-interface:
-  display_name: "Design Optimization Formulation"
-  short_description: "Translate a design decision into an optimization model"
-  default_prompt: "Use $design-optimization-formulation to help with my engineering design problem."
