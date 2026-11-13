@@ -35,3 +35,9 @@ python3 scripts/validate_skills.py
 Check example arithmetic separately. For behavioral evaluation, give an agent the skill and raw task inputs, withhold the intended result, and assess its artifact using the checks in `evals/README.md`. Record the host, model, date, available tools, and observed limitations. Do not describe structural validation as behavioral evaluation.
 
 Update the catalog and link the issue in the change description. Small, coherent method contributions are easier to assess than a large set of partially specified methods.
+
+## Demo website
+
+Every implemented skill has one entry in `site/demos.json`. Provide a short, curated interaction that demonstrates the method's artifact and at least one consequential quality check. Label illustrative data and avoid presenting authored responses as live model output or measured agent performance.
+
+The build renders instructions, templates, and worked examples from the existing skill directories. Keep those materials in their source files rather than duplicating them in the site content. Run `python3 scripts/build_site.py` and `python3 scripts/check_site.py` after changing the site or adding a skill. For the browser-local optimization explorer, verify the equations and representative trial designs when changing its behavior.

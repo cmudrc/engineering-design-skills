@@ -1,0 +1,99 @@
+[
+  {
+    "slug": "engineering-design-process",
+    "title": "Engineering design process",
+    "eyebrow": "01 / Guide the process",
+    "short": "Choose the next useful design activity.",
+    "description": "Turn a broad brief into a bounded decision, then choose the method that will move it forward.",
+    "output": "A design record and a justified next step.",
+    "inputs": "A brief, current artifacts, and the decisions still open.",
+    "check": "Does the next activity resolve the uncertainty that matters?",
+    "turns": [
+      {
+        "user": "We need a hand-carried container for 5 L of chilled contents during a six-hour outdoor event. We would like it to weigh no more than 1.5 kg before loading. Can we start choosing wall materials?",
+        "assistant": "### First, make the thermal requirement measurable.\n\nThe brief gives us a useful starting point, but “chilled for six hours” leaves the initial temperature, ambient conditions, and acceptable endpoint unresolved. Those choices can change the architecture and insulation needed.\n\n| Design record | Current state |\n|---|---|\n| Payload | 5 L |\n| Operating time | 6 h |\n| Ready-to-load mass | 1.5 kg target, including prescribed coolant |\n| Temperature protocol | Open question |\n| Existing solutions | Available for benchmarking |\n\n**Next method: technical benchmarking.** Compare reference containers under common conditions before committing to a wall material."
+      },
+      {
+        "user": "For this demo, use 4 °C initial contents, 30 °C ambient, a 10 °C endpoint, and a closed lid. The container should be passive, and the contents must stay dry.",
+        "assistant": "### We now have a provisional operating scenario.\n\nRecord the temperature protocol and passive operation as requirements for this exercise. Keep the 1.5 kg mass as a target until its feasibility is better understood.\n\nThe next iteration should produce a benchmark matrix, followed by a small set of concepts that cover four functions: limit heat ingress, absorb incoming heat, contain the payload, and carry the load.\n\n**Decision D1:** defer wall-material selection while exploring the architecture. Revisit this when comparable evidence or a thermal model supports narrowing the choices."
+      },
+      {
+        "user": "What if the benchmark data are incomplete?",
+        "assistant": "### Continue with the evidence that is comparable.\n\nCompare common-protocol results, mark missing values, and identify the measurement most likely to change the design decision. Concept exploration can continue alongside that work, with performance claims kept provisional.\n\n**Next action:** obtain the missing thermal protocol and coolant mass for the ambiguous reference container. If the required information cannot be obtained, test that container under the common protocol or leave its thermal ranking unresolved.\n\nThe process loops back when new evidence changes the requirements or concept set. It does not require every project to pass through every method."
+      }
+    ]
+  },
+  {
+    "slug": "technical-benchmarking",
+    "title": "Technical benchmarking",
+    "eyebrow": "02 / Compare the evidence",
+    "short": "Separate comparable performance from promising claims.",
+    "description": "Compare reference products on a common functional basis and turn supported gaps into design opportunities.",
+    "output": "A benchmark matrix, comparability notes, and opportunities.",
+    "inputs": "Reference solutions, metric definitions, and evidence.",
+    "check": "Do units, inclusion boundaries, and test conditions actually match?",
+    "turns": [
+      {
+        "user": "Our fictional reference tests say A weighs 2.0 kg and holds 5 L for 6 h; B weighs 1.5 kg and holds 5 L for 5 h. Both use our common thermal protocol, and their masses include coolant. C claims 10 h for 8 L at 20 °C ambient, with unspecified initial temperature; its 1.2 kg mass excludes coolant. Which is best?",
+        "assistant": "### A and B support a direct comparison. C needs more evidence.\n\nAll values below are synthetic inputs supplied in the prompt.\n\n| Reference | Ready-to-load mass | Hold time | Comparability |\n|---|---:|---:|---|\n| A | 2.0 kg | 6 h | Common protocol |\n| B | 1.5 kg | 5 h | Common protocol |\n| C | Unknown | Not comparable | Different thermal conditions; coolant excluded from mass |\n\nB is **25% lighter** than A and has **16.7% less hold time**. A meets the six-hour threshold; B meets the mass target. Neither dominates the other on these two metrics.\n\nC's reported performance cannot establish an overall winner."
+      },
+      {
+        "user": "Could we divide C’s hold time by its payload volume to normalize it?",
+        "assistant": "### That ratio would not repair the mismatch.\n\nThermal performance depends on geometry, insulation, temperature differences, coolant, and the test protocol. Hold time per liter assumes a scaling relationship we have not established.\n\n**Evidence needed for C:** initial and endpoint temperatures, payload properties, lid-opening schedule, full test conditions, and prescribed coolant mass. Keep its current numbers as a supplier claim with those limitations."
+      },
+      {
+        "user": "What design opportunity does the benchmark suggest?",
+        "assistant": "### Investigate a six-hour design at a 1.5 kg ready-to-load mass.\n\nThat target combines the desirable observed properties of A and B. The benchmark motivates investigating it; it does not prove that combination is feasible.\n\n**Next method:** morphological synthesis to explore how insulation, cooling storage, containment, and carrying can work together. Then model or test the concepts whose physical tradeoffs are most promising."
+      }
+    ]
+  },
+  {
+    "slug": "morphological-synthesis",
+    "title": "Morphological synthesis",
+    "eyebrow": "03 / Generate alternatives",
+    "short": "Combine functional principles into coherent concepts.",
+    "description": "Explore different ways a system can work, while making coupling and compatibility explicit.",
+    "output": "A morphological chart and traceable concept descriptions.",
+    "inputs": "Required functions, operating context, and fixed constraints.",
+    "check": "Does each combination form a complete, compatible system?",
+    "turns": [
+      {
+        "user": "Explore concepts for our passive 5 L container. The contents must stay dry. We need ways to limit heat ingress, absorb heat, contain the payload, and carry the load.",
+        "assistant": "### Start with a chart of solution principles.\n\n| Function | A | B | C |\n|---|---|---|---|\n| F1: Limit heat ingress | Molded foam | Protected vacuum panels | Evacuated double wall |\n| F2: Absorb heat | Sealed water-ice packs | Sealed 5 °C phase-change packs | Powered thermoelectric cooling |\n| F3: Contain payload | Rigid sealed liner | Flexible welded liner | — |\n| F4: Carry load | Handle | Shoulder harness | — |\n\nThere are **36 theoretical selections**. These are candidate combinations, with compatibility still to assess. The cooling capacity and property of any phase-change material require evidence."
+      },
+      {
+        "user": "Which combinations can we reject, and which should we keep?",
+        "assistant": "### Screen against the brief and expose the dependencies.\n\nPowered thermoelectric cooling conflicts with the passive-operation requirement. Reject the 12 combinations containing that choice.\n\nVacuum panels with a flexible liner remain **unresolved**: the panels need protective support and compatible load paths. They are not automatically infeasible. Loose ice sharing the payload compartment would violate the dry-contents requirement; the chart uses sealed packs instead.\n\nTwo concepts worth developing:\n\n- **C1:** molded foam + sealed water-ice packs + rigid liner + handle. A simple baseline with explicit paths for heat flow, sealing, and carrying loads.\n- **C2:** protected vacuum panels + 5 °C phase-change packs + rigid liner + shoulder harness. Investigate thermal bridges, panel protection, pack behavior, and load attachment.\n\nThe 24 selections remaining after the first rejection still require compatibility and feasibility checks."
+      },
+      {
+        "user": "Let’s formulate the foam-and-ice option mathematically. Does that mean we have selected it?",
+        "assistant": "### Use it as a modeling baseline and keep the alternative open.\n\nFix C1's architecture for one analysis: vary insulation thickness and ice mass. Keep C2 in the concept set until comparative evidence supports eliminating it.\n\n**Handoff:** optimization formulation can make C1's tradeoff explicit. A thermal model and a prototype test will be needed to assess whether a calculated energy budget delivers the required payload temperature."
+      }
+    ]
+  },
+  {
+    "slug": "design-optimization-formulation",
+    "title": "Design optimization formulation",
+    "eyebrow": "04 / Make the problem explicit",
+    "short": "Translate design intent into variables and constraints.",
+    "description": "Define the mathematical problem, expose its assumptions, and check trial designs before choosing a solver.",
+    "output": "A traceable formulation and model-readiness assessment.",
+    "inputs": "Design intent, controllable choices, requirements, and models.",
+    "check": "Does the mathematical problem represent the engineering decision?",
+    "turns": [
+      {
+        "user": "For a synthetic foam-and-ice model, choose thickness t from 10 to 60 mm and ice mass m from 0.2 to 1.0 kg. Assume shell mass 0.4 kg, insulation density 30 kg/m³, effective area 0.25 m², conductivity 0.03 W/(m·K), temperature difference 30 K, thermal-bridge leak 0.5 W, and effective ice latent capacity 334 kJ/kg. Minimize ready-to-load mass for a six-hour energy budget and a 1.5 kg mass limit.",
+        "assistant": "### Separate the decision variables, physics, and requirements.\n\nUse SI units in the model. The area and thermal parameters are fixed, synthetic approximations; the payload is excluded from ready-to-load mass.\n\n```text\nVariables: t in [0.010, 0.060] m; m in [0.2, 1.0] kg\nMass:      M(t,m) = 0.4 + 30 × 0.25 × t + m\nHeat leak: Q(t)   = 0.03 × 0.25 × 30 / t + 0.5\n\nMinimize M(t,m), subject to:\n  21600 × Q(t) - 334000 × m <= 0    [J]\n  M(t,m) - 1.5 <= 0                [kg]\n  variable bounds\n```\n\nThe mass limit is also stated as a hard constraint because the prompt requests it. The first inequality budgets latent cooling energy over six hours."
+      },
+      {
+        "user": "Check t = 30 mm with 0.55 kg of ice, then t = 20 mm with 0.50 kg of ice.",
+        "assistant": "### One trial passes the toy constraints; the other is short of cooling energy.\n\n| Trial | Mass | Heat leak | Six-hour energy margin | Result |\n|---|---:|---:|---:|---|\n| 30 mm / 0.55 kg | 1.175 kg | 8.00 W | +10.9 kJ | Passes modeled constraints |\n| 20 mm / 0.50 kg | 1.050 kg | 11.75 W | −86.8 kJ | Fails energy constraint |\n\nA positive energy margin means available latent capacity exceeds the modeled six-hour heat input. These trial checks show how the constraint works; neither point is claimed to be optimal."
+      },
+      {
+        "user": "Can we now say the first design keeps the contents below 10 °C for six hours?",
+        "assistant": "### The energy budget does not yet establish the payload temperature.\n\nThe current model omits payload-to-coolant thermal coupling, transient temperature, geometry changes, openings, and real material variation. It also excludes the vacuum-panel architecture.\n\n**Formulation gap:** the original temperature requirement needs an additional thermal model or a common-protocol experiment. Treat this formulation as a preliminary energy screen and preserve that missing relationship in the design record.\n\n**Next action:** characterize heat leak and payload temperature on a prototype. Revise the model if those measurements contradict its assumptions, then choose a numerical exploration method."
+      }
+    ],
+    "explorer": true
+  }
+]

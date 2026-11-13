@@ -6,6 +6,8 @@ Engineering design involves choosing what problem to solve, generating alternati
 
 **Status: initial scaffold.** Four draft skills establish the structure. The remaining methods are tracked as GitHub issues. The drafts include worked examples and structural checks; their effects on agent performance have not been evaluated.
 
+**[Explore the demos on GitHub Pages](https://cmudrc.github.io/engineering-design-skills/)**. Each skill has a curated conversation alongside the current instructions, output template, and worked example.
+
 ## Starter skills
 
 | Skill | Role | Output |
@@ -44,6 +46,19 @@ python3 scripts/validate_skills.py
 ```
 
 The validator checks skill frontmatter and local resource links, and rejects host-specific `agents/` configuration inside skill directories. Behavioral evaluation cases are described in [evals/README.md](evals/README.md); they require an actual agent run and are not implied by structural validation.
+
+## Website
+
+The GitHub Pages site is built from `site/demos.json`, `site/style.css`, `site/site.js`, and the existing skill Markdown. The build copies the portable skill resources as downloads and renders the instructions directly from their source. Demo conversations are authored illustrations with synthetic inputs, not live model calls or controlled agent evaluations.
+
+```bash
+python3 scripts/build_site.py --base-path /engineering-design-skills
+python3 scripts/check_site.py
+```
+
+The generated `_site/` directory is ignored by Git. To preview it locally, serve it at the matching `/engineering-design-skills/` prefix, or build and check with `--base-path ''` for a server rooted directly in `_site/`. The optimization page includes a browser-local toy-model explorer; its energy screen does not establish the original payload-temperature requirement.
+
+The Pages workflow builds and checks every pull request, and deploys successful builds from `main`. Update a skill's Markdown to update its documentation on the site; edit `site/demos.json` to change a curated interaction. Add one demo entry when introducing a new skill.
 
 ## License
 
