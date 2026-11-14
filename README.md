@@ -6,7 +6,7 @@ Engineering design involves choosing what problem to solve, generating alternati
 
 **Status: initial scaffold.** Four draft skills establish the structure. The remaining methods are tracked as GitHub issues. The drafts include worked examples and structural checks; their effects on agent performance have not been evaluated.
 
-**[Explore the demos on GitHub Pages](https://cmudrc.github.io/engineering-design-skills/)**. Each skill has a curated conversation alongside the current instructions, output template, and worked example.
+**[Explore the demos on GitHub Pages](https://cmudrc.github.io/engineering-design-skills/)**. Each skill shows its complete example conversation in a scrollable chat window alongside the current instructions, output template, and worked example.
 
 ## Starter skills
 
@@ -49,14 +49,14 @@ The validator checks skill frontmatter and local resource links, and rejects hos
 
 ## Website
 
-The GitHub Pages site is built from `site/demos.json`, `site/style.css`, `site/site.js`, and the existing skill Markdown. The build copies the portable skill resources as downloads and renders the instructions directly from their source. Demo conversations are authored illustrations with synthetic inputs, not live model calls or controlled agent evaluations.
+The GitHub Pages site is built from `site/demos.json` and `site/style.css`. Each skill page has a complete scrollable example chat, links to its original instructions and worked example, and a downloadable template. The build also copies the portable skill resources as downloads. Demo conversations are authored illustrations with synthetic inputs, not live model calls or controlled agent evaluations.
 
 ```bash
 python3 scripts/build_site.py --base-path /engineering-design-skills
 python3 scripts/check_site.py
 ```
 
-The generated `_site/` directory is ignored by Git. To preview it locally, serve it at the matching `/engineering-design-skills/` prefix, or build and check with `--base-path ''` for a server rooted directly in `_site/`. The optimization page includes a browser-local toy-model explorer; its energy screen does not establish the original payload-temperature requirement.
+The generated `_site/` directory is ignored by Git. To preview it locally, serve it at the matching `/engineering-design-skills/` prefix, or build and check with `--base-path ''` for a server rooted directly in `_site/`. Every demo shows the complete conversation in a scrollable chat window, with all exchanges visible from the start.
 
 The Pages workflow builds and checks every pull request, and deploys successful builds from `main`. Update a skill's Markdown to update its documentation on the site; edit `site/demos.json` to change a curated interaction. Add one demo entry when introducing a new skill.
 

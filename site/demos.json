@@ -2,12 +2,7 @@
   {
     "slug": "engineering-design-process",
     "title": "Engineering design process",
-    "eyebrow": "01 / Guide the process",
     "short": "Choose the next useful design activity.",
-    "description": "Turn a broad brief into a bounded decision, then choose the method that will move it forward.",
-    "output": "A design record and a justified next step.",
-    "inputs": "A brief, current artifacts, and the decisions still open.",
-    "check": "Does the next activity resolve the uncertainty that matters?",
     "turns": [
       {
         "user": "We need a hand-carried container for 5 L of chilled contents during a six-hour outdoor event. We would like it to weigh no more than 1.5 kg before loading. Can we start choosing wall materials?",
@@ -26,12 +21,7 @@
   {
     "slug": "technical-benchmarking",
     "title": "Technical benchmarking",
-    "eyebrow": "02 / Compare the evidence",
     "short": "Separate comparable performance from promising claims.",
-    "description": "Compare reference products on a common functional basis and turn supported gaps into design opportunities.",
-    "output": "A benchmark matrix, comparability notes, and opportunities.",
-    "inputs": "Reference solutions, metric definitions, and evidence.",
-    "check": "Do units, inclusion boundaries, and test conditions actually match?",
     "turns": [
       {
         "user": "Our fictional reference tests say A weighs 2.0 kg and holds 5 L for 6 h; B weighs 1.5 kg and holds 5 L for 5 h. Both use our common thermal protocol, and their masses include coolant. C claims 10 h for 8 L at 20 °C ambient, with unspecified initial temperature; its 1.2 kg mass excludes coolant. Which is best?",
@@ -50,12 +40,7 @@
   {
     "slug": "morphological-synthesis",
     "title": "Morphological synthesis",
-    "eyebrow": "03 / Generate alternatives",
     "short": "Combine functional principles into coherent concepts.",
-    "description": "Explore different ways a system can work, while making coupling and compatibility explicit.",
-    "output": "A morphological chart and traceable concept descriptions.",
-    "inputs": "Required functions, operating context, and fixed constraints.",
-    "check": "Does each combination form a complete, compatible system?",
     "turns": [
       {
         "user": "Explore concepts for our passive 5 L container. The contents must stay dry. We need ways to limit heat ingress, absorb heat, contain the payload, and carry the load.",
@@ -74,12 +59,7 @@
   {
     "slug": "design-optimization-formulation",
     "title": "Design optimization formulation",
-    "eyebrow": "04 / Make the problem explicit",
     "short": "Translate design intent into variables and constraints.",
-    "description": "Define the mathematical problem, expose its assumptions, and check trial designs before choosing a solver.",
-    "output": "A traceable formulation and model-readiness assessment.",
-    "inputs": "Design intent, controllable choices, requirements, and models.",
-    "check": "Does the mathematical problem represent the engineering decision?",
     "turns": [
       {
         "user": "For a synthetic foam-and-ice model, choose thickness t from 10 to 60 mm and ice mass m from 0.2 to 1.0 kg. Assume shell mass 0.4 kg, insulation density 30 kg/m³, effective area 0.25 m², conductivity 0.03 W/(m·K), temperature difference 30 K, thermal-bridge leak 0.5 W, and effective ice latent capacity 334 kJ/kg. Minimize ready-to-load mass for a six-hour energy budget and a 1.5 kg mass limit.",
@@ -93,7 +73,6 @@
         "user": "Can we now say the first design keeps the contents below 10 °C for six hours?",
         "assistant": "### The energy budget does not yet establish the payload temperature.\n\nThe current model omits payload-to-coolant thermal coupling, transient temperature, geometry changes, openings, and real material variation. It also excludes the vacuum-panel architecture.\n\n**Formulation gap:** the original temperature requirement needs an additional thermal model or a common-protocol experiment. Treat this formulation as a preliminary energy screen and preserve that missing relationship in the design record.\n\n**Next action:** characterize heat leak and payload temperature on a prototype. Revise the model if those measurements contradict its assumptions, then choose a numerical exploration method."
       }
-    ],
-    "explorer": true
+    ]
   }
 ]

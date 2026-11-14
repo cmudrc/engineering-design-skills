@@ -14,8 +14,11 @@ class Page(HTMLParser):
         super().__init__()
         self.ids = []
         self.links = []
-        self.controls = []
+        self.scripts = 0
         self.exchanges = 0
+        self.hidden_exchanges = 0
+        self.chat_windows = 0
+        self.demo_controls = 0
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
@@ -24,10 +27,19 @@ class Page(HTMLParser):
         for key in ('href', 'src'):
             if key in attrs:
                 self.links.append(attrs[key])
-        if 'aria-controls' in attrs:
-            self.controls.extend(attrs['aria-controls'].split())
+        if tag == 'script':
+            self.scripts += 1
         if 'data-exchange' in attrs:
             self.exchanges += 1
+            self.hidden_exchanges += 'hidden' in attrs
+        if attrs.get('class') == 'conversation':
+            assert attrs.get('role') == 'region' and attrs.get('aria-label'), 'Chat window needs an accessible name'
+            assert attrs.get('tabindex') == '0', 'Chat window must support keyboard scrolling'
+            self.chat_windows += 1
+        if any(key.startswith('data-demo-') or key == 'data-model-reset' for key in attrs):
+            self.demo_controls += 1
+        if tag == 'input' and attrs.get('type') == 'range':
+            self.demo_controls += 1
 
 
 def main():
@@ -42,7 +54,7 @@ def main():
         page = Page()
         page.feed(path.read_text())
         assert len(page.ids) == len(set(page.ids)), f'Duplicate IDs in {path}'
-        assert set(page.controls) <= set(page.ids), f'Unresolved aria-controls in {path}'
+        assert page.scripts == 0, f'Expected static pages without JavaScript: {path}'
         pages[path] = page
     demos = json.loads((ROOT/'site/demos.json').read_text())
     assert len(pages) == len(demos)+1, 'Missing or unexpected generated pages'
@@ -69,12 +81,15 @@ def main():
         slug = demo['slug']
         page = pages[output/'skills'/slug/'index.html']
         assert page.exchanges == len(demo['turns']), f'Demo exchanges missing for {slug}'
+        assert page.hidden_exchanges == 0, f'Chat exchanges hidden for {slug}'
+        assert page.chat_windows == 1, f'Expected one accessible chat window for {slug}'
+        assert page.demo_controls == 0, f'Interactive demo controls remain for {slug}'
         for source in (ROOT/'skills'/slug).rglob('*'):
             if source.is_file():
                 download = output/'downloads'/slug/source.relative_to(ROOT/'skills'/slug)
                 assert download.read_bytes() == source.read_bytes(), f'Download changed: {download}'
     assert not list((output/'downloads').rglob('agents')), 'Host-specific configuration in downloads'
-    print(f'Checked {len(pages)} pages: internal links, anchors, tab controls, demo exchanges, and exact source downloads.')
+    print(f'Checked {len(pages)} pages: internal links, anchors, complete static accessible chats, and exact source downloads.')
 
 
 if __name__ == '__main__':
