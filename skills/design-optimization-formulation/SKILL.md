@@ -2,6 +2,9 @@
 name: design-optimization-formulation
 description: Formulate an engineering design decision as an optimization problem with explicit variables, objectives, constraints, analysis models, and uncertainty. Use before choosing a solver, when translating a design brief into mathematics, or when auditing whether an optimization model represents the intended design problem.
 license: MIT
+metadata:
+  phase-framework: ulrich-eppinger-6e
+  phases: "1,2,3,4"
 ---
 
 # Design Optimization Formulation
@@ -35,3 +38,7 @@ Identify the system boundary, operating scenarios, stakeholder outcomes, and dec
 Deliver the formulation, symbol tables, analysis dependencies, trial-point results or precise evaluation gaps, assumptions, and unresolved preference choices. State the next step required for numerical exploration without silently running a costly search.
 
 Reference: Martins and Ning, [Engineering Design Optimization](https://mdobook.github.io/), especially constrained, discrete, multiobjective, and uncertainty formulations. The engineering example and instructions here are original.
+
+## Phase context
+
+Use in Phases 1–4: model concept tradeoffs, architecture allocations, detailed part choices, or changes motivated by test evidence. Match the model’s fidelity to the decision. Writing an optimization problem alone does not mean a project has reached Detail Design. The phase framework is Ulrich and Eppinger, *Product Design and Development*, 6th edition (2016), Chapter 2.

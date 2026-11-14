@@ -1,53 +1,54 @@
 ---
 name: engineering-design-process
-description: Guide an iterative engineering design project for physical products or engineered systems. Use when planning a design process, choosing design methods, assessing the current design state, or deciding what to investigate next.
+description: Guide physical-product and engineering-system development through Ulrich and Eppinger’s phases 0–5. Use to establish the current development state, choose methods, plan phase outputs, or decide what to investigate next.
 license: MIT
+metadata:
+  phase-framework: ulrich-eppinger-6e
+  phases: "0,1,2,3,4,5"
 ---
 
 # Engineering Design Process
 
-Help the designer make the next consequential design decision with an appropriate method and a clear evidence trail. Scale the process to the project's maturity, uncertainty, and available resources.
+Use Ulrich and Eppinger’s six-phase framework to connect the current engineering decision to the next useful artifact. Match the process to the project rather than imposing a fixed sequence of activities.
 
-## Establish the current design state
+## Establish the development state
 
-Start with the user's brief and existing artifacts. Identify the intended use, stakeholders, system boundary, desired outcomes, constraints, candidate concepts, available evidence, and unresolved decisions. Preserve supplied requirements and distinguish them from proposed targets. Ask for missing information when it changes the next decision; otherwise state a provisional assumption and continue useful work.
+Start with the user's language and existing work. Identify the intended users, opportunity, system boundary, desired outcome, available evidence, and unresolved decision. A vague request is a useful starting point: ask the question that most affects the next decision, and develop the brief progressively. Preserve the distinction between user requirements, preferences, and proposed assumptions.
 
-Use [assets/design-record.md](assets/design-record.md) as a compact working record. Populate only the parts useful to this project. Retain stable identifiers for needs, requirements, concepts, evidence, and decisions when tracing them becomes valuable.
+Identify the phase from the state of the product and its evidence. If different workstreams occupy different phases, record those separately. Using a method associated with a phase is not evidence that the phase is complete.
 
-## Choose the next method
-
-Identify the most consequential uncertainty or decision. Select a method because of the artifact or evidence it will produce, and explain that choice briefly.
-
-| Current need | Candidate method | Expected result |
+| Phase | Decision focus | Typical output |
 |---|---|---|
-| Clarify what should change and for whom | Problem framing; stakeholder and needs analysis | Bounded brief and needs |
-| Understand existing solutions and performance gaps | Technical benchmarking; teardown | Comparable evidence and opportunities |
-| Make success measurable | Requirements and specifications; QFD | Targets, constraints, and verification criteria |
-| Understand what the system must do | Functional modeling; architecture and interfaces | Functions, flows, dependencies |
-| Explore ways to achieve those functions | Morphological synthesis; analogy; TRIZ; heuristics | Distinct, coherent concepts |
-| Compare alternatives | Concept screening; trade study | Evidence-based comparison and decision rationale |
-| Express a design decision mathematically | Design optimization formulation | Variables, objectives, constraints, and analysis models |
-| Explore a defined model | Optimization and exploration; robust design | Tradeoffs, sensitivity, and candidate designs |
-| Resolve an empirical uncertainty | Prototyping and experimental planning | A test tied to a decision |
-| Refine implementation and life-cycle performance | Failure analysis; DFMA; value and sustainable design | Specific design changes and their tradeoffs |
+| 0: Planning | Which opportunity and development mission should the team pursue? | Mission statement, intended users, business goals, assumptions, and constraints. |
+| 1: Concept Development | What should the product do, and which concept should be developed? | Needs, specifications, evaluated concepts, concept-test evidence, and downstream plan. |
+| 2: System-Level Design | How should functions be allocated to subsystems and interfaces? | Architecture, layout, subsystem requirements, and preliminary production/assembly plan. |
+| 3: Detail Design | What exactly will be built, purchased, and manufactured? | Geometry, materials, tolerances, component specifications, and process documentation. |
+| 4: Testing and Refinement | Does the developed product work in its intended use, and what must change? | Product-test evidence, resolved changes, and readiness assessment. |
+| 5: Production Ramp-Up | Can the intended production system consistently produce the product? | Evaluated early output, operator preparation, resolved production issues, and launch readiness. |
 
-This repository initially includes `technical-benchmarking`, `morphological-synthesis`, and `design-optimization-formulation`. Other methods in this table are roadmap ideas. Use an installed method skill when available. When a named skill is unavailable, explain the method directly or recommend it as the next activity; do not claim to invoke a missing capability. The process skill remains usable independently.
+Use [assets/design-record.md](assets/design-record.md) for the working record. Read [references/phases.md](references/phases.md) for phase boundaries, typical handoffs, and cross-phase interpretation.
 
-## Run a bounded iteration
+## Choose methods with many-to-many membership
 
-1. State the decision and the evidence needed to make it.
-2. Apply the chosen method with the available inputs and tools.
-3. Review the artifact for internal consistency, evidence gaps, and implications for other design choices.
-4. Update the design record: what changed, why, remaining uncertainty, and next action.
+Select a method because of the decision and artifact it supports. The same skill can be useful in several phases. Adapt its inputs, model fidelity, and quality checks to the current phase.
 
-Allow new findings to revise the framing, requirements, or concept set. Multiple activities may proceed concurrently when their dependencies allow it. Preserve alternatives until there is a reason to eliminate them. Scale documentation to the decision rather than forcing every project through every method.
+- **Phase 0:** opportunity identification, product planning, problem framing, needs research, and benchmarking support a bounded mission.
+- **Phase 1:** needs and specifications, benchmarking, functional modeling, morphological synthesis, analogy, TRIZ, screening, selection, and concept testing support concept development. Cycle between these activities as evidence changes.
+- **Phase 2:** architecture and interfaces, subsystem functional modeling, morphological synthesis, trade studies, and optimization formulation support allocation and integration choices.
+- **Phase 3:** optimization, robust design and tolerances, failure analysis, DFMA, and cost or environmental assessment support buildable detail decisions.
+- **Phase 4:** prototyping and experiments, benchmarking, failure analysis, robust design, and model revision support product testing and refinement.
+- **Phase 5:** production ramp-up, DFMA, quality and failure investigations, variation assessment, and early-production evaluation support production readiness.
 
-## Quality checks and handoff
+The repository initially implements `technical-benchmarking`, `morphological-synthesis`, and `design-optimization-formulation`. The other methods are planned. Use an available method skill when present; otherwise explain the method directly or recommend it as the next activity without claiming to invoke a missing capability. This process skill is independently usable.
 
-- Trace a recommendation to stakeholder value, a requirement, or an explicit hypothesis.
-- Keep observed facts, assumed values, calculations, and proposed concepts distinguishable.
-- Recognize when the missing input is a measurement, user preference, or external decision rather than more analysis.
-- Record the basis for discarding a concept or revising a requirement.
-- End with an actionable next step, its intended learning or decision, and what would justify changing direction.
+## Run a bounded iteration and review the handoff
 
-For an illustration, read [references/worked-example.md](references/worked-example.md). Method foundations: [MIT Product Design and Development](https://ocw.mit.edu/courses/15-783j-product-design-and-development-spring-2006/pages/lecture-notes/) and [NASA System Design Processes](https://www.nasa.gov/reference/4-0-system-design-processes/). The workflow here is an original synthesis, not a reproduction of either source.
+1. State the current phase or workstream, decision, and consequential uncertainty.
+2. Choose a method and say what artifact or evidence it should produce.
+3. Apply it, distinguishing observations, assumptions, calculations, and hypotheses.
+4. Review implications for the current phase output and earlier decisions.
+5. Record what changed, the next action, and what would justify advancing or revisiting a phase.
+
+Keep alternatives open until evidence supports narrowing them. An early feasibility mockup can belong in Phase 1; Phase 4 concerns evaluation of developed product versions. An optimization formulation can support concept or system-level choices before detailed geometry exists. Phase 5 requires evidence from the intended production system, not merely a successful prototype.
+
+For an illustration, read [references/worked-example.md](references/worked-example.md). Framework: Karl T. Ulrich and Steven D. Eppinger, *Product Design and Development*, 6th edition (2016), Chapter 2, pp. 13–16, Exhibits 2-2 and 2-3. The summaries and skill-routing choices here are original adaptations.

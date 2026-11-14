@@ -10,6 +10,8 @@ import shutil
 
 import markdown
 
+from catalog import load_catalog
+
 ROOT = Path(__file__).resolve().parents[1]
 REPO = 'https://github.com/cmudrc/engineering-design-skills'
 BASE = ''
@@ -43,23 +45,34 @@ def shell(title, body):
 </body></html>'''
 
 
-def homepage(skills):
-    rows = []
-    for skill in skills:
-        rows.append(f'''<a class="skill-link" href="{url('skills/'+skill['slug']+'/')}"><div><h2>{escape(skill['title'])}</h2><p>{escape(skill['short'])}</p></div><span aria-hidden="true">↗</span></a>''')
-    body = f'''<main id="main" class="home"><h1>AI Skills for<br>Engineering Design</h1><p class="intro">Reusable methods for agents designing physical products and engineered systems.</p><nav class="skill-list" aria-label="Skills">{''.join(rows)}</nav></main>'''
+def homepage(skills, catalog):
+    phase_sections = []
+    for phase in catalog['phases']:
+        members = [s for s in catalog['skills'] if s['status']=='draft' and s['slug']!='engineering-design-process' and phase['id'] in s['phases']]
+        links = ''.join(f'<li><a href="{url("skills/"+s["slug"]+"/")}">{escape(s["name"])} <span aria-hidden="true">↗</span></a></li>' for s in members)
+        if not links:
+            links = '<li class="no-draft">No draft method yet.</li>'
+        planned = sum(s['status']=='planned' and phase['id'] in s['phases'] for s in catalog['skills'])
+        issue_url = REPO+'/issues?q=is%3Aopen%20label%3A%22phase%3A'+str(phase['id'])+'%22'
+        phase_sections.append(f'<section class="phase-block" id="phase-{phase["id"]}"><h2><span>Phase {phase["id"]}</span>{escape(phase["name"])}</h2><ul>{links}</ul><a class="planned-link" href="{issue_url}">{planned} planned methods ↗</a></section>')
+    body = f'''<main id="main" class="home"><h1>AI Skills for<br>Engineering Design</h1><p class="intro">Ulrich &amp; Eppinger’s six phases. Skills can belong to more than one.</p><a class="process-link" href="{url('skills/engineering-design-process/')}"><span>Engineering design process</span><small>All phases · 0–5</small><b aria-hidden="true">↗</b></a><div class="phase-grid">{''.join(phase_sections)}</div><p class="framework-note">Based on <em>Product Design and Development</em>, 6th edition. <a href="{REPO}/blob/main/docs/skill-catalog.md">Phase mapping ↗</a></p></main>'''
     return shell('AI Skills for Engineering Design', body)
 
 
-def skillpage(skill):
+def skillpage(skill, catalog):
     slug = skill['slug']
     directory = ROOT/'skills'/slug
     template = next((directory/'assets').glob('*.md'))
     template_path = str(template.relative_to(directory))
+    membership = next(s['phases'] for s in catalog['skills'] if s['slug']==slug)
+    if len(membership)==6:
+        phase_links = '<a href="'+url('#phase-0')+'">All phases · 0–5</a>'
+    else:
+        phase_links = ' '.join(f'<a href="{url("#phase-"+str(i))}" title="{escape(catalog["phases"][i]["name"], quote=True)}" aria-label="Phase {i}: {escape(catalog["phases"][i]["name"], quote=True)}">{i}</a>' for i in membership)
     exchanges = []
     for i, turn in enumerate(skill['turns']):
-        exchanges.append(f'''<article class="exchange" data-exchange="{i}"><div class="message user-message"><span class="role">You</span><p>{escape(turn['user'])}</p></div><div class="message assistant-message"><span class="role">Agent</span><div class="prose">{render(turn['assistant'])}</div></div></article>''')
-    body = f'''<main id="main" class="skill-page"><a class="back" href="{url()}">← All skills</a><h1>{escape(skill['title'])}</h1><p class="intro">{escape(skill['short'])}</p><nav class="resources" aria-label="Skill resources"><a href="{REPO}/blob/main/skills/{slug}/SKILL.md">Instructions ↗</a><a href="{url(f'downloads/{slug}/{template_path}')}" download>Template ↓</a><a href="{REPO}/blob/main/skills/{slug}/references/worked-example.md">Worked example ↗</a></nav><div class="chat-window"><div class="chat-header"><span>Example chat</span><span>Synthetic inputs</span></div><div class="conversation" role="region" aria-label="Example chat: {escape(skill['title'], quote=True)}" tabindex="0">{''.join(exchanges)}</div></div></main>'''
+        exchanges.append(f'''<article class="exchange" data-exchange="{i}"><div class="message user-message"><div class="speaker"><span class="avatar" aria-hidden="true">Y</span><span>You</span></div><div class="bubble"><p>{escape(turn['user'])}</p></div></div><div class="message assistant-message"><div class="speaker"><span class="avatar" aria-hidden="true">AI</span><span>Agent</span></div><div class="bubble prose">{render(turn['assistant'])}</div></div></article>''')
+    body = f'''<main id="main" class="skill-page"><a class="back" href="{url()}">← All skills</a><h1>{escape(skill['title'])}</h1><p class="intro">{escape(skill['short'])}</p><div class="phase-membership"><span>Phases</span>{phase_links}</div><nav class="resources" aria-label="Skill resources"><a href="{REPO}/blob/main/skills/{slug}/SKILL.md">Instructions ↗</a><a href="{url(f'downloads/{slug}/{template_path}')}" download>Template ↓</a><a href="{REPO}/blob/main/skills/{slug}/references/worked-example.md">Worked example ↗</a></nav><div class="chat-window"><div class="chat-header"><span class="chat-title"><span class="chat-mark" aria-hidden="true">↳</span> Example chat</span><span>Illustrative · synthetic data</span></div><div class="conversation" role="region" aria-label="Example chat: {escape(skill['title'], quote=True)}" tabindex="0">{''.join(exchanges)}</div></div></main>'''
     return shell(skill['title']+' · AI Skills for Engineering Design', body)
 
 
@@ -83,6 +96,7 @@ def main():
     (output/'.site-output').write_text('Generated by scripts/build_site.py\n')
     (output/'.nojekyll').touch()
     skills=json.loads((ROOT/'site/demos.json').read_text())
+    catalog=load_catalog()
     actual={p.parent.name for p in (ROOT/'skills').glob('*/SKILL.md')}
     if {s['slug'] for s in skills} != actual or len(skills) != len(actual):
         raise ValueError('Each implemented skill must have exactly one demo')
@@ -91,14 +105,14 @@ def main():
     assets.mkdir()
     for filename in ['style.css','favicon.svg']:
         shutil.copyfile(ROOT/'site'/filename, assets/filename)
-    (output/'index.html').write_text(homepage(skills),encoding='utf-8')
+    (output/'index.html').write_text(homepage(skills, catalog),encoding='utf-8')
     for skill in skills:
         slug=skill['slug']
         if not skill['turns'] or any(not t.get('user') or not t.get('assistant') for t in skill['turns']):
             raise ValueError(f'{slug}: demo exchanges need both roles')
         page=output/'skills'/slug
         page.mkdir(parents=True)
-        (page/'index.html').write_text(skillpage(skill),encoding='utf-8')
+        (page/'index.html').write_text(skillpage(skill,catalog),encoding='utf-8')
         shutil.copytree(ROOT/'skills'/slug, output/'downloads'/slug)
     print(f'Built {len(skills)+1} static pages with {sum(len(s["turns"]) for s in skills)} chat exchanges at {output}.')
 

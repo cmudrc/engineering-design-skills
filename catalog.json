@@ -1,0 +1,398 @@
+{
+  "framework": {
+    "id": "ulrich-eppinger-6e",
+    "name": "Ulrich and Eppinger, Product Design and Development",
+    "edition": 6,
+    "year": 2016,
+    "reference": "Chapter 2, pp. 13–16, Exhibits 2-2 and 2-3; Exhibit 1-4, p. 9.",
+    "mapping_note": "Phase names follow the book. Skill memberships are this library’s many-to-many interpretation of useful application contexts, not a claim that the book assigns these agent skills."
+  },
+  "phases": [
+    {
+      "id": 0,
+      "name": "Planning",
+      "purpose": "Define the opportunity and the project mission before committing to development.",
+      "output": "Mission statement, target users, business goals, assumptions, and constraints."
+    },
+    {
+      "id": 1,
+      "name": "Concept Development",
+      "purpose": "Understand needs, develop specifications, and generate, select, and test product concepts.",
+      "output": "Selected concept, supporting evidence, specifications, and a downstream development plan."
+    },
+    {
+      "id": 2,
+      "name": "System-Level Design",
+      "purpose": "Define the architecture, subsystems, interfaces, and initial production and assembly approach.",
+      "output": "System layout, subsystem requirements, interface definitions, and preliminary assembly plan."
+    },
+    {
+      "id": 3,
+      "name": "Detail Design",
+      "purpose": "Specify parts, materials, geometry, tolerances, purchased components, and production processes.",
+      "output": "Buildable design definition, drawings or models, component specifications, and process documentation."
+    },
+    {
+      "id": 4,
+      "name": "Testing and Refinement",
+      "purpose": "Evaluate developed product versions against intended performance and use, then resolve needed changes.",
+      "output": "Test evidence, resolved design changes, and confidence in product and process readiness."
+    },
+    {
+      "id": 5,
+      "name": "Production Ramp-Up",
+      "purpose": "Use the intended production system, train operators, and resolve problems found in early output.",
+      "output": "Evaluated early production, stabilized operations, and launch-readiness evidence."
+    }
+  ],
+  "skills": [
+    {
+      "slug": "engineering-design-process",
+      "name": "Engineering design process",
+      "phases": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "status": "draft"
+    },
+    {
+      "slug": "technical-benchmarking",
+      "name": "Technical benchmarking",
+      "phases": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "status": "draft"
+    },
+    {
+      "slug": "morphological-synthesis",
+      "name": "Morphological synthesis",
+      "phases": [
+        1,
+        2
+      ],
+      "status": "draft"
+    },
+    {
+      "slug": "design-optimization-formulation",
+      "name": "Design optimization formulation",
+      "phases": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "status": "draft"
+    },
+    {
+      "slug": "problem-framing",
+      "name": "Problem framing and reframing",
+      "phases": [
+        0,
+        1
+      ],
+      "status": "planned",
+      "issue": 1
+    },
+    {
+      "slug": "stakeholder-needs-analysis",
+      "name": "Stakeholder and needs analysis",
+      "phases": [
+        0,
+        1,
+        4
+      ],
+      "status": "planned",
+      "issue": 2
+    },
+    {
+      "slug": "product-teardown-reverse-engineering",
+      "name": "Product teardown and reverse engineering",
+      "phases": [
+        0,
+        1,
+        2
+      ],
+      "status": "planned",
+      "issue": 3
+    },
+    {
+      "slug": "requirements-specifications",
+      "name": "Requirements and specifications",
+      "phases": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "status": "planned",
+      "issue": 4
+    },
+    {
+      "slug": "quality-function-deployment",
+      "name": "Quality function deployment",
+      "phases": [
+        1,
+        2
+      ],
+      "status": "planned",
+      "issue": 5
+    },
+    {
+      "slug": "functional-modeling-decomposition",
+      "name": "Functional modeling and decomposition",
+      "phases": [
+        1,
+        2
+      ],
+      "status": "planned",
+      "issue": 6
+    },
+    {
+      "slug": "product-architecture-interfaces",
+      "name": "Product architecture and interfaces",
+      "phases": [
+        1,
+        2
+      ],
+      "status": "planned",
+      "issue": 7
+    },
+    {
+      "slug": "design-by-analogy",
+      "name": "Design by analogy",
+      "phases": [
+        0,
+        1,
+        2
+      ],
+      "status": "planned",
+      "issue": 8
+    },
+    {
+      "slug": "triz-contradiction-resolution",
+      "name": "TRIZ and contradiction resolution",
+      "phases": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "status": "planned",
+      "issue": 9
+    },
+    {
+      "slug": "heuristic-concept-generation",
+      "name": "Heuristic concept generation",
+      "phases": [
+        1,
+        2,
+        3
+      ],
+      "status": "planned",
+      "issue": 10
+    },
+    {
+      "slug": "concept-screening",
+      "name": "Concept screening",
+      "phases": [
+        1,
+        2
+      ],
+      "status": "planned",
+      "issue": 11
+    },
+    {
+      "slug": "concept-evaluation-trade-studies",
+      "name": "Concept evaluation and trade studies",
+      "phases": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "status": "planned",
+      "issue": 12
+    },
+    {
+      "slug": "design-optimization-exploration",
+      "name": "Design optimization and exploration",
+      "phases": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "status": "planned",
+      "issue": 13
+    },
+    {
+      "slug": "robust-design-tolerance-allocation",
+      "name": "Robust design and tolerance allocation",
+      "phases": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "status": "planned",
+      "issue": 14
+    },
+    {
+      "slug": "prototyping-experimental-planning",
+      "name": "Prototyping and experimental planning",
+      "phases": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "status": "planned",
+      "issue": 15
+    },
+    {
+      "slug": "failure-modes-design-risk",
+      "name": "Failure modes and design risk analysis",
+      "phases": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "status": "planned",
+      "issue": 16
+    },
+    {
+      "slug": "design-for-manufacture-assembly",
+      "name": "Design for manufacture and assembly",
+      "phases": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "status": "planned",
+      "issue": 17
+    },
+    {
+      "slug": "cost-value-engineering",
+      "name": "Cost and value engineering",
+      "phases": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "status": "planned",
+      "issue": 18
+    },
+    {
+      "slug": "sustainable-life-cycle-design",
+      "name": "Sustainable and life-cycle design",
+      "phases": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "status": "planned",
+      "issue": 19
+    },
+    {
+      "slug": "ck-design-exploration",
+      "name": "C–K design exploration",
+      "phases": [
+        0,
+        1,
+        2
+      ],
+      "status": "planned",
+      "issue": 20
+    },
+    {
+      "slug": "axiomatic-design",
+      "name": "Axiomatic design",
+      "phases": [
+        1,
+        2,
+        3
+      ],
+      "status": "planned",
+      "issue": 21
+    },
+    {
+      "slug": "set-based-design",
+      "name": "Set-based design",
+      "phases": [
+        1,
+        2,
+        3
+      ],
+      "status": "planned",
+      "issue": 22
+    },
+    {
+      "slug": "human-factors-design",
+      "name": "Human-factors methods for engineering design",
+      "phases": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "status": "planned",
+      "issue": 23
+    },
+    {
+      "slug": "opportunity-identification",
+      "name": "Opportunity identification",
+      "phases": [
+        0
+      ],
+      "status": "planned",
+      "issue": 24
+    },
+    {
+      "slug": "product-planning",
+      "name": "Product planning",
+      "phases": [
+        0
+      ],
+      "status": "planned",
+      "issue": 25
+    },
+    {
+      "slug": "concept-testing",
+      "name": "Concept testing",
+      "phases": [
+        1
+      ],
+      "status": "planned",
+      "issue": 26
+    },
+    {
+      "slug": "production-ramp-up",
+      "name": "Production ramp-up",
+      "phases": [
+        5
+      ],
+      "status": "planned",
+      "issue": 27
+    }
+  ]
+}

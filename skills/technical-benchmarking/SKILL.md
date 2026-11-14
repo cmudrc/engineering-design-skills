@@ -2,6 +2,9 @@
 name: technical-benchmarking
 description: Benchmark existing engineering products, mechanisms, or systems using comparable performance metrics and traceable evidence. Use to assess the state of the art, compare reference solutions, identify performance gaps, or inform design targets.
 license: MIT
+metadata:
+  phase-framework: ulrich-eppinger-6e
+  phases: "0,1,2,4"
 ---
 
 # Technical Benchmarking
@@ -38,3 +41,7 @@ Before finalizing, check that:
 This skill addresses engineering solution benchmarking. Evaluation of agent performance requires a separately designed study.
 
 Method context: [MIT Product Design and Development](https://ocw.mit.edu/courses/15-783j-product-design-and-development-spring-2006/pages/lecture-notes/) and [NASA Decision Analysis](https://www.nasa.gov/reference/6-8-decision-analysis/). These sources support the broader comparison and decision context; the evidence protocol here is an original implementation.
+
+## Phase context
+
+Use in Phase 0 (Planning) to compare opportunity baselines, Phase 1 (Concept Development) to establish competitive targets, Phase 2 (System-Level Design) to compare architectures or subsystems, and Phase 4 (Testing and Refinement) to compare developed performance. Adapt the comparison question and evidence maturity to the phase. The phase framework is Ulrich and Eppinger, *Product Design and Development*, 6th edition (2016), Chapter 2.

@@ -2,6 +2,9 @@
 name: morphological-synthesis
 description: Generate engineering concepts by combining solution principles for required functions in a morphological chart. Use when exploring alternative physical architectures, expanding a concept set, or systematically combining subfunction solutions.
 license: MIT
+metadata:
+  phase-framework: ulrich-eppinger-6e
+  phases: "1,2"
 ---
 
 # Morphological Synthesis
@@ -30,3 +33,7 @@ Deliver the functional scope, morphological chart, compatibility notes, identifi
 Before handoff, check that every concept covers the required functions, excluded combinations have a defensible reason, and physical feasibility claims are supported at the current level of analysis. A concept may remain promising with explicitly unresolved questions. Concept screening, modeling, or a targeted experiment can follow.
 
 Method context: [MIT Product Specifications and Concept Generation materials](https://ocw.mit.edu/courses/15-783j-product-design-and-development-spring-2006/pages/lecture-notes/). The instructions, chart template, and example here are original.
+
+## Phase context
+
+Use in Phase 1 (Concept Development) to combine solution principles into product concepts, and Phase 2 (System-Level Design) to explore subsystem arrangements and interfaces. A new component-level problem may warrant reusing the method later; phase membership is guidance rather than a restriction. The phase framework is Ulrich and Eppinger, *Product Design and Development*, 6th edition (2016), Chapter 2.

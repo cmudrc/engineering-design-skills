@@ -6,6 +6,8 @@ import json
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
+from catalog import load_catalog
+
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -57,6 +59,8 @@ def main():
         assert page.scripts == 0, f'Expected static pages without JavaScript: {path}'
         pages[path] = page
     demos = json.loads((ROOT/'site/demos.json').read_text())
+    catalog = load_catalog()
+    assert {f'phase-{i}' for i in range(6)} <= set(pages[output/'index.html'].ids), 'Missing homepage phase groups'
     assert len(pages) == len(demos)+1, 'Missing or unexpected generated pages'
     for path, page in pages.items():
         for link in page.links:
@@ -84,6 +88,9 @@ def main():
         assert page.hidden_exchanges == 0, f'Chat exchanges hidden for {slug}'
         assert page.chat_windows == 1, f'Expected one accessible chat window for {slug}'
         assert page.demo_controls == 0, f'Interactive demo controls remain for {slug}'
+        membership = next(s['phases'] for s in catalog['skills'] if s['slug']==slug)
+        expected = {base+'/#phase-'+str(i) for i in (membership if len(membership)<6 else [0])}
+        assert expected <= set(page.links), f'Missing phase membership links for {slug}'
         for source in (ROOT/'skills'/slug).rglob('*'):
             if source.is_file():
                 download = output/'downloads'/slug/source.relative_to(ROOT/'skills'/slug)

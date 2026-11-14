@@ -11,11 +11,12 @@ Each skill should specify:
 3. **Procedure:** the reasoning steps and method-specific choices that matter.
 4. **Output:** a reviewable engineering artifact, with a reusable template where useful.
 5. **Quality checks:** likely method failures, assumptions, and checks on the artifact.
-6. **Continuation:** what the result enables and which uncertainty should be addressed next.
+6. **Phase membership:** one or more Ulrich and Eppinger phases from 0–5, with a clear decision and artifact in each context.
+7. **Continuation:** what the result enables and which uncertainty should be addressed next.
 
 Keep the entry point short and directly link resources. Use lowercase hyphenated directory names that match the frontmatter `name`. Include `name`, `description`, and `license: MIT` in the YAML frontmatter.
 
-Keep skill directories platform neutral. Define discovery names and descriptions in `SKILL.md`; keep host-specific presentation and invocation configuration outside the distributed skills. The validator rejects `agents/` configuration inside skill directories.
+Keep skill directories platform neutral. Define discovery names and descriptions in `SKILL.md`; keep host-specific presentation and invocation configuration outside the distributed skills. The validator rejects `agents/` configuration inside skill directories. Put phase membership in `catalog.json` and mirror implemented skills’ memberships in portable frontmatter `metadata` using the framework ID `ulrich-eppinger-6e` and a comma-separated `phases` string. Run `python3 scripts/catalog.py` to regenerate the catalog reference.
 
 ## Evidence and examples
 
@@ -38,6 +39,6 @@ Update the catalog and link the issue in the change description. Small, coherent
 
 ## Demo website
 
-Every implemented skill has one entry in `site/demos.json`. Provide a short, curated interaction that demonstrates the method's artifact and at least one consequential quality check. Label illustrative data and avoid presenting authored responses as live model output or measured agent performance.
+Every implemented skill has one entry in `site/demos.json`. Start with a realistic, incomplete human request. Show the agent asking relevant questions and developing the inputs rather than having the opening prompt supply the full method or model. Provide a short, curated interaction that demonstrates the method's artifact and at least one consequential quality check. Label illustrative data and avoid presenting authored responses as live model output or measured agent performance.
 
 Link instructions and worked examples to their existing source files, and copy templates from the skill directories. Keep source materials in those files rather than duplicating them in the site content. Run `python3 scripts/build_site.py` and `python3 scripts/check_site.py` after changing the site or adding a skill. Display the complete conversation in a scrollable, keyboard-accessible chat window. Keep examples readable without step-through controls or a model explorer.

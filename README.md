@@ -4,9 +4,15 @@ An open library of agent skills for engineering design, maintained by the [Desig
 
 Engineering design involves choosing what problem to solve, generating alternatives, comparing evidence, and deciding what to learn next. This library packages those methods as reusable instructions with explicit inputs, engineering artifacts, and quality checks.
 
-**Status: initial scaffold.** Four draft skills establish the structure. The remaining methods are tracked as GitHub issues. The drafts include worked examples and structural checks; their effects on agent performance have not been evaluated.
+**Status: initial scaffold.** Four draft skills establish the structure. The remaining methods are tracked as GitHub issues and mapped to phases 0–5 of Ulrich and Eppinger’s product-development process. The drafts include worked examples and structural checks; their effects on agent performance have not been evaluated.
 
 **[Explore the demos on GitHub Pages](https://cmudrc.github.io/engineering-design-skills/)**. Each skill shows its complete example conversation in a scrollable chat window alongside the current instructions, output template, and worked example.
+
+## Process framework
+
+The library follows Ulrich and Eppinger’s six phases: **0 Planning, 1 Concept Development, 2 System-Level Design, 3 Detail Design, 4 Testing and Refinement, and 5 Production Ramp-Up**. Skills have many-to-many membership. The same method may support different decisions in several phases; using it does not by itself establish phase completion.
+
+`catalog.json` is the source of truth for phases, implemented skills, and planned methods. The [generated catalog](docs/skill-catalog.md) provides the complete mapping and attribution. The overall process skill spans all six phases; the current method implementations emphasize concept and analytical design.
 
 ## Starter skills
 
@@ -43,13 +49,14 @@ See the [skill catalog](docs/skill-catalog.md) for the complete roadmap and issu
 ```bash
 python3 -m pip install -r requirements-dev.txt
 python3 scripts/validate_skills.py
+python3 scripts/catalog.py --check
 ```
 
 The validator checks skill frontmatter and local resource links, and rejects host-specific `agents/` configuration inside skill directories. Behavioral evaluation cases are described in [evals/README.md](evals/README.md); they require an actual agent run and are not implied by structural validation.
 
 ## Website
 
-The GitHub Pages site is built from `site/demos.json` and `site/style.css`. Each skill page has a complete scrollable example chat, links to its original instructions and worked example, and a downloadable template. The build also copies the portable skill resources as downloads. Demo conversations are authored illustrations with synthetic inputs, not live model calls or controlled agent evaluations.
+The GitHub Pages site is built from `catalog.json`, `site/demos.json`, and `site/style.css`. Each skill page has a complete scrollable example chat, links to its original instructions and worked example, and a downloadable template. The build also copies the portable skill resources as downloads. Demo conversations are authored illustrations with synthetic inputs, not live model calls or controlled agent evaluations.
 
 ```bash
 python3 scripts/build_site.py --base-path /engineering-design-skills
@@ -58,7 +65,7 @@ python3 scripts/check_site.py
 
 The generated `_site/` directory is ignored by Git. To preview it locally, serve it at the matching `/engineering-design-skills/` prefix, or build and check with `--base-path ''` for a server rooted directly in `_site/`. Every demo shows the complete conversation in a scrollable chat window, with all exchanges visible from the start.
 
-The Pages workflow builds and checks every pull request, and deploys successful builds from `main`. Update a skill's Markdown to update its documentation on the site; edit `site/demos.json` to change a curated interaction. Add one demo entry when introducing a new skill.
+The Pages workflow builds and checks every pull request, and deploys successful builds from `main`. Update a skill's Markdown to update its documentation on the site; edit `site/demos.json` to change a curated interaction. Add one demo entry and catalog membership when introducing a new skill. Start demos from natural, incomplete human requests and show the agent developing the method’s inputs and artifacts. Regenerate catalog documentation with `python3 scripts/catalog.py` after editing `catalog.json`.
 
 ## License
 

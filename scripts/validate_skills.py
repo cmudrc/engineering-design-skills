@@ -5,6 +5,8 @@ import re
 import sys
 from urllib.parse import unquote, urlsplit
 
+from catalog import load_catalog, render_catalog
+
 try:
     import yaml
 except ImportError:
@@ -64,11 +66,25 @@ def main():
         print("No skills found", file=sys.stderr)
         return 1
     errors = [error for skill in skills for error in validate(skill)]
+    try:
+        catalog = load_catalog()
+        for entry in catalog['skills']:
+            if entry['status'] != 'draft':
+                continue
+            text = (ROOT/'skills'/entry['slug']/'SKILL.md').read_text()
+            meta = yaml.safe_load(text.split('---',2)[1]).get('metadata', {})
+            expected = ','.join(map(str, entry['phases']))
+            if meta.get('phases') != expected or meta.get('phase-framework') != catalog['framework']['id']:
+                errors.append(f"{entry['slug']}: phase metadata differs from catalog.json")
+        if (ROOT/'docs/skill-catalog.md').read_text() != render_catalog(catalog):
+            errors.append('Phase catalog docs are stale; run python3 scripts/catalog.py')
+    except (AssertionError, KeyError, ValueError, OSError) as exc:
+        errors.append(f'Phase catalog: {exc}')
     for error in errors:
         print(error, file=sys.stderr)
     if errors:
         return 1
-    print(f"Validated {len(skills)} skills: frontmatter, local resource links, and platform-neutral structure.")
+    print(f"Validated {len(skills)} skills: frontmatter, resource links, platform-neutral structure, and many-to-many phase membership.")
     print("This check does not evaluate agent behavior or engineering validity.")
     return 0
 

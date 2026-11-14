@@ -8,6 +8,8 @@ Design a hand-carried container for 5 L of chilled contents during a six-hour ou
 
 ## Initial design state
 
+The mission is partly defined, so the first iteration closes Phase 0 Planning questions and develops Phase 1 Concept Development evidence. Benchmarking and early experiments can occur within Phase 1. Their use does not automatically place the project in Phase 4.
+
 The desired outcome is clear enough to begin, but “stays cold” lacks an endpoint temperature, ambient condition, payload definition, and opening schedule. Choosing a wall material now would leave several dominant assumptions implicit. Existing reference products may help establish a realistic comparison.
 
 ## First iteration
@@ -20,11 +22,15 @@ The desired outcome is clear enough to begin, but “stays cold” lacks an endp
 
 **Design record update:** define a proposed common protocol: 5 L water-equivalent payload, initial temperature 4 degrees C, ambient 30 degrees C, endpoint 10 degrees C, lid closed. These values remain synthetic project choices requiring confirmation for a real application. Treat a 1.5 kg, six-hour design as a target to investigate, not a demonstrated feasible combination.
 
-## Second iteration
+## Second iteration: Phase 1, then Phase 2 as appropriate
 
 Once the thermal requirement is accepted, explore functions such as limit heat ingress, store cooling capacity, contain contents, and enable carrying. Morphological synthesis can combine different solution principles; each concept still needs a heat-balance estimate or experiment.
 
 If the team fixes an architecture and asks how insulation thickness and coolant mass should trade off, use optimization formulation. Keep a conceptual architecture choice open if the proposed model cannot represent it.
+
+## Downstream handoffs
+
+Phase 2 would resolve the architecture, coolant placement, containment, carrying interfaces, and preliminary assembly approach. Phase 3 would specify actual geometry, materials, tolerances, and fabrication details. Phase 4 would evaluate developed product versions and refine the design. Phase 5 would evaluate early output from the intended production system. These are future activities, not accomplishments of this example.
 
 ## Stopping point
 

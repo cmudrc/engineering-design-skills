@@ -1,5 +1,11 @@
 # Design record
 
+## Phase and development state
+
+- Current phase(s) from 0–5, by workstream when needed:
+- Evidence supporting that phase assessment:
+- Expected phase output and unresolved handoff questions:
+
 ## Brief and current decision
 
 - Intended use, stakeholders, and operating context:
@@ -19,8 +25,8 @@
 
 ## Decisions and iterations
 
-| ID | Decision | Alternatives considered | Basis and tradeoffs | Revisit if |
-|---|---|---|---|---|
+| ID | Phase / workstream | Decision | Alternatives considered | Basis and tradeoffs | Revisit if |
+|---|---|---|---|---|---|
 
 ## Next method and action
 
