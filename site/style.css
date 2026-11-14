@@ -3,6 +3,7 @@
 body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:15px;line-height:1.65}
 a{color:inherit;text-underline-offset:4px}
 a:focus-visible,.conversation:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
+summary:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
 .skip-link{position:fixed;top:10px;left:10px;z-index:10;transform:translateY(-160%);padding:8px 14px;background:var(--ink);color:white}
 .skip-link:focus{transform:translateY(0)}
 header,footer{max-width:1040px;margin:auto;padding:24px 36px;display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:12px}
@@ -26,6 +27,17 @@ h1{font:400 58px/1.08 Georgia,"Times New Roman",serif;letter-spacing:-1.8px;marg
 .resources{display:flex;gap:25px;flex-wrap:wrap;font-size:12px;margin:18px 0 24px;color:var(--blue)}
 .resources a{text-decoration:none}
 .resources a:hover{text-decoration:underline}
+.install-options{margin-top:18px;font-size:12px}
+.install-actions{display:flex;flex-wrap:wrap;gap:10px}
+.install-actions a{display:inline-block;padding:7px 13px;border:1px solid var(--blue);border-radius:7px;color:var(--blue);text-decoration:none}
+.install-actions a:first-child{background:var(--blue);color:#fff}
+.install-actions a:hover{text-decoration:underline}
+.install-options details{margin-top:10px;color:var(--muted)}
+.install-options summary{cursor:pointer;width:fit-content}
+.install-options details p{margin:10px 0}
+.install-options pre{max-width:100%;overflow-x:auto;padding:12px;background:#edf0e8;color:var(--ink);font:11px/1.8 var(--mono)}
+.install-options code{font-family:var(--mono)}
+.install-sources{font-size:10px}
 .chat-window{border:1px solid #d4ddea;border-radius:16px;overflow:hidden;background:#f1f4fa;box-shadow:0 12px 34px rgba(35,53,87,.07)}
 .chat-header{display:flex;align-items:center;justify-content:space-between;padding:14px 21px;gap:20px;background:#fff;border-bottom:1px solid #e0e6ef;font-size:11px}
 .chat-title{display:flex;align-items:center;gap:9px;font-weight:600}

@@ -4,7 +4,8 @@ import argparse
 from html.parser import HTMLParser
 import json
 from pathlib import Path
-from urllib.parse import unquote, urlsplit
+from urllib.parse import parse_qs, unquote, urlsplit
+from zipfile import ZipFile
 
 from catalog import load_catalog
 
@@ -91,12 +92,26 @@ def main():
         membership = next(s['phases'] for s in catalog['skills'] if s['slug']==slug)
         expected = {base+'/#phase-'+str(i) for i in (membership if len(membership)<6 else [0])}
         assert expected <= set(page.links), f'Missing phase membership links for {slug}'
+        install_links = [urlsplit(link) for link in page.links if urlsplit(link).scheme == 'codex']
+        assert len(install_links) == 1, f'Expected one Codex install entry for {slug}'
+        install_link = install_links[0]
+        assert install_link.netloc == 'new' and not install_link.path, f'Invalid Codex route for {slug}'
+        params = parse_qs(install_link.query, strict_parsing=True)
+        prompt = f'$skill-installer Install the skill from https://github.com/cmudrc/engineering-design-skills/tree/main/skills/{slug}'
+        assert params == {'prompt': [prompt]}, f'Incorrect or extra Codex install parameters for {slug}'
+        assert base+f'/downloads/{slug}.zip' in page.links, f'Missing skill ZIP link for {slug}'
+        with ZipFile(output/'downloads'/f'{slug}.zip') as archive:
+            sources = {str(Path(slug)/source.relative_to(ROOT/'skills'/slug)): source.read_bytes()
+                       for source in (ROOT/'skills'/slug).rglob('*') if source.is_file()}
+            sources[f'{slug}/LICENSE'] = (ROOT/'LICENSE').read_bytes()
+            assert len(archive.namelist()) == len(sources) and set(archive.namelist()) == set(sources), f'Unexpected ZIP contents for {slug}'
+            assert all(archive.read(name) == data for name, data in sources.items()), f'ZIP differs from source for {slug}'
         for source in (ROOT/'skills'/slug).rglob('*'):
             if source.is_file():
                 download = output/'downloads'/slug/source.relative_to(ROOT/'skills'/slug)
                 assert download.read_bytes() == source.read_bytes(), f'Download changed: {download}'
     assert not list((output/'downloads').rglob('agents')), 'Host-specific configuration in downloads'
-    print(f'Checked {len(pages)} pages: internal links, anchors, complete static accessible chats, and exact source downloads.')
+    print(f'Checked {len(pages)} pages: links, complete static accessible chats, Codex install requests, and exact source downloads/ZIPs.')
 
 
 if __name__ == '__main__':

@@ -31,6 +31,18 @@ The process skill provides a top-level entry point. Each method skill also works
 
 ## Use
 
+Each [demo page](https://cmudrc.github.io/engineering-design-skills/) includes **Open in Codex**, which opens a prefilled `$skill-installer` request. Send the request to install that skill. This uses the [documented Codex new-chat link](https://learn.chatgpt.com/docs/reference/commands); it does not install or send automatically.
+
+For **Claude**, download the skill ZIP from its demo page and upload it under [Customize → Skills](https://claude.ai/customize/skills), then enable it. The ZIP includes the complete skill folder and MIT license. See [Claude's upload instructions](https://support.claude.com/en/articles/12512180-use-skills-in-claude).
+
+For **Claude Code**, run this in your project, substituting the desired skill name:
+
+```bash
+npx skills add cmudrc/engineering-design-skills --skill technical-benchmarking -a claude-code
+```
+
+The [Skills CLI](https://github.com/vercel-labs/skills) requires Node.js 22.20+. Omit `-a claude-code` to choose another supported coding agent. It installs to the current project by default; add `-g` for all projects.
+
 The skills follow the [Agent Skills format](https://agentskills.io/specification). Each directory under `skills/` contains a `SKILL.md` entry point, an output template in `assets/`, and a worked example in `references/`. The skill content is platform neutral; each host supplies its own installation, presentation, and invocation settings. No engineering solver, API key, or proprietary application is required for the starter workflows.
 
 For a first inspection, open a skill's `SKILL.md` and follow its instructions in your agent environment. For an environment that discovers skills from a local skills directory, copy the **complete skill directory**, including its `assets/` and `references/`, to that location. Discovery and invocation syntax depend on the host. The method skills do not require their siblings to be installed.
