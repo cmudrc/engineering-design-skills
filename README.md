@@ -33,7 +33,7 @@ The process skill provides a top-level entry point. Each method skill also works
 
 Each [demo page](https://cmudrc.github.io/engineering-design-skills/) includes **Open in Codex**, which opens a prefilled `$skill-installer` request. Send the request to install that skill. This uses the [documented Codex new-chat link](https://learn.chatgpt.com/docs/reference/commands); it does not install or send automatically.
 
-For **Claude**, download the skill ZIP from its demo page and upload it under [Customize → Skills](https://claude.ai/customize/skills), then enable it. The ZIP includes the complete skill folder and MIT license. See [Claude's upload instructions](https://support.claude.com/en/articles/12512180-use-skills-in-claude).
+**Open in Claude Code** opens a prefilled install request in Claude Desktop using its [documented `claude://code/new` link](https://support.claude.com/en/articles/14729294-open-claude-desktop-with-a-link). The request installs the complete skill into your personal `~/.claude/skills/` directory for all projects after you send it. Install help also provides a [Claude Code terminal link](https://code.claude.com/docs/en/deep-links) using `claude-cli://open`. The terminal handler must already be registered by using an interactive Claude Code session.
 
 For **Claude Code**, run this in your project, substituting the desired skill name:
 
@@ -42,6 +42,8 @@ npx skills add cmudrc/engineering-design-skills --skill technical-benchmarking -
 ```
 
 The [Skills CLI](https://github.com/vercel-labs/skills) requires Node.js 22.20+. Omit `-a claude-code` to choose another supported coding agent. It installs to the current project by default; add `-g` for all projects.
+
+For **Claude chat**, Install help retains a skill ZIP download. Upload it under [Customize → Skills](https://claude.ai/customize/skills), then enable it. The ZIP includes the complete skill folder and MIT license. See [Claude's upload instructions](https://support.claude.com/en/articles/12512180-use-skills-in-claude).
 
 The skills follow the [Agent Skills format](https://agentskills.io/specification). Each directory under `skills/` contains a `SKILL.md` entry point, an output template in `assets/`, and a worked example in `references/`. The skill content is platform neutral; each host supplies its own installation, presentation, and invocation settings. No engineering solver, API key, or proprietary application is required for the starter workflows.
 

@@ -34,9 +34,17 @@ def codex_install_url(slug):
     return 'codex://new?prompt=' + quote(prompt, safe='')
 
 
+def claude_install_url(slug, terminal=False):
+    prompt = (f'Install the skill from {REPO}/tree/main/skills/{slug} '
+              f'into ~/.claude/skills/{slug} for all my projects, including its assets and references. '
+              'Preserve any existing local customizations.')
+    route = 'claude-cli://open' if terminal else 'claude://code/new'
+    return route + '?q=' + quote(prompt, safe='')
+
+
 def install_options(slug):
     command = f'npx skills add cmudrc/engineering-design-skills --skill {slug} -a claude-code'
-    return f'''<div class="install-options"><nav class="install-actions" aria-label="Install skill"><a href="{escape(codex_install_url(slug), quote=True)}">Open in Codex ↗</a><a href="{url(f'downloads/{slug}.zip')}" download>Claude ZIP ↓</a></nav><details><summary>Install help</summary><p><strong>Codex:</strong> opens a prefilled install request. Send it to start installation.</p><p><strong>Claude:</strong> download the ZIP, then open <a href="https://claude.ai/customize/skills">Customize → Skills</a> and choose “Upload a skill.” Upload the ZIP and enable the skill.</p><p><strong>Claude Code:</strong> run this in your project (requires Node.js 22.20+):</p><pre><code>{escape(command)}</code></pre><p>For another coding agent, omit <code>-a claude-code</code> and choose your agent. Installation uses the current project by default; add <code>-g</code> for all projects.</p><p class="install-sources">Installation docs: <a href="https://learn.chatgpt.com/docs/reference/commands">Codex links</a> · <a href="https://support.claude.com/en/articles/12512180-use-skills-in-claude">Claude skills</a> · <a href="https://github.com/vercel-labs/skills">Skills CLI</a></p></details></div>'''
+    return f'''<div class="install-options"><nav class="install-actions" aria-label="Install skill"><a href="{escape(codex_install_url(slug), quote=True)}">Open in Codex ↗</a><a href="{escape(claude_install_url(slug), quote=True)}">Open in Claude Code ↗</a></nav><details><summary>Install help</summary><p>The buttons open prefilled install requests in the desktop apps. Review and send the request to install for your user account, across projects.</p><p>Prefer the terminal? <a href="{escape(claude_install_url(slug, terminal=True), quote=True)}">Open Claude Code in a terminal ↗</a>. If the link does nothing, first send a prompt in an interactive Claude Code session to register its link handler.</p><p>Or run this in your project (requires Node.js 22.20+):</p><pre><code>{escape(command)}</code></pre><p>For another coding agent, omit <code>-a claude-code</code> and choose your agent. The command installs to the current project by default; add <code>-g</code> for all projects.</p><p>Using Claude chat? <a href="{url(f'downloads/{slug}.zip')}" download>Download the skill ZIP</a> and upload it under <a href="https://claude.ai/customize/skills">Customize → Skills</a>, then enable it.</p><p class="install-sources">Installation docs: <a href="https://learn.chatgpt.com/docs/reference/commands">Codex</a> · <a href="https://support.claude.com/en/articles/14729294-open-claude-desktop-with-a-link">Claude Desktop</a> · <a href="https://code.claude.com/docs/en/deep-links">Claude Code terminal</a> · <a href="https://github.com/vercel-labs/skills">Skills CLI</a></p></details></div>'''
 
 
 def shell(title, body):

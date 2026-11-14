@@ -99,6 +99,16 @@ def main():
         params = parse_qs(install_link.query, strict_parsing=True)
         prompt = f'$skill-installer Install the skill from https://github.com/cmudrc/engineering-design-skills/tree/main/skills/{slug}'
         assert params == {'prompt': [prompt]}, f'Incorrect or extra Codex install parameters for {slug}'
+        claude_prompt = (f'Install the skill from https://github.com/cmudrc/engineering-design-skills/tree/main/skills/{slug} '
+                        f'into ~/.claude/skills/{slug} for all my projects, including its assets and references. '
+                        'Preserve any existing local customizations.')
+        for scheme, host, route in [('claude', 'code', '/new'), ('claude-cli', 'open', '')]:
+            links = [urlsplit(link) for link in page.links if urlsplit(link).scheme == scheme]
+            assert len(links) == 1, f'Expected one {scheme} install entry for {slug}'
+            link = links[0]
+            assert (link.netloc, link.path) == (host, route), f'Invalid {scheme} route for {slug}'
+            assert parse_qs(link.query, strict_parsing=True) == {'q': [claude_prompt]}, f'Incorrect {scheme} install request for {slug}'
+        assert len(claude_prompt) <= 5000, f'Claude terminal prompt too long for {slug}'
         assert base+f'/downloads/{slug}.zip' in page.links, f'Missing skill ZIP link for {slug}'
         with ZipFile(output/'downloads'/f'{slug}.zip') as archive:
             sources = {str(Path(slug)/source.relative_to(ROOT/'skills'/slug)): source.read_bytes()
@@ -111,7 +121,7 @@ def main():
                 download = output/'downloads'/slug/source.relative_to(ROOT/'skills'/slug)
                 assert download.read_bytes() == source.read_bytes(), f'Download changed: {download}'
     assert not list((output/'downloads').rglob('agents')), 'Host-specific configuration in downloads'
-    print(f'Checked {len(pages)} pages: links, complete static accessible chats, Codex install requests, and exact source downloads/ZIPs.')
+    print(f'Checked {len(pages)} pages: links, complete static accessible chats, Codex/Claude desktop/terminal install requests, and exact source downloads/ZIPs.')
 
 
 if __name__ == '__main__':
