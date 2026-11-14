@@ -23,6 +23,10 @@ The library uses Ulrich and Eppinger’s six product-development phases. Skills 
 | [Technical benchmarking](../skills/technical-benchmarking/SKILL.md) | 0, 1, 2, 4 |
 | [Morphological synthesis](../skills/morphological-synthesis/SKILL.md) | 1, 2 |
 | [Design optimization formulation](../skills/design-optimization-formulation/SKILL.md) | 1, 2, 3, 4 |
+| [Prototyping and experimental planning](../skills/prototyping-experimental-planning/SKILL.md) | 1, 2, 3, 4, 5 |
+| [Design for manufacture and assembly](../skills/design-for-manufacture-assembly/SKILL.md) | 2, 3, 4, 5 |
+| [Product planning](../skills/product-planning/SKILL.md) | 0 |
+| [Production ramp-up](../skills/production-ramp-up/SKILL.md) | 5 |
 
 ## Planned methods
 
@@ -42,9 +46,7 @@ The library uses Ulrich and Eppinger’s six product-development phases. Skills 
 | Concept evaluation and trade studies | 0, 1, 2, 3, 4 | [#12](https://github.com/cmudrc/engineering-design-skills/issues/12) |
 | Design optimization and exploration | 1, 2, 3, 4 | [#13](https://github.com/cmudrc/engineering-design-skills/issues/13) |
 | Robust design and tolerance allocation | 1, 2, 3, 4, 5 | [#14](https://github.com/cmudrc/engineering-design-skills/issues/14) |
-| Prototyping and experimental planning | 1, 2, 3, 4, 5 | [#15](https://github.com/cmudrc/engineering-design-skills/issues/15) |
 | Failure modes and design risk analysis | 1, 2, 3, 4, 5 | [#16](https://github.com/cmudrc/engineering-design-skills/issues/16) |
-| Design for manufacture and assembly | 2, 3, 4, 5 | [#17](https://github.com/cmudrc/engineering-design-skills/issues/17) |
 | Cost and value engineering | 0, 1, 2, 3, 4, 5 | [#18](https://github.com/cmudrc/engineering-design-skills/issues/18) |
 | Sustainable and life-cycle design | 0, 1, 2, 3, 4, 5 | [#19](https://github.com/cmudrc/engineering-design-skills/issues/19) |
 | C–K design exploration | 0, 1, 2 | [#20](https://github.com/cmudrc/engineering-design-skills/issues/20) |
@@ -52,15 +54,13 @@ The library uses Ulrich and Eppinger’s six product-development phases. Skills 
 | Set-based design | 1, 2, 3 | [#22](https://github.com/cmudrc/engineering-design-skills/issues/22) |
 | Human-factors methods for engineering design | 1, 2, 3, 4, 5 | [#23](https://github.com/cmudrc/engineering-design-skills/issues/23) |
 | Opportunity identification | 0 | [#24](https://github.com/cmudrc/engineering-design-skills/issues/24) |
-| Product planning | 0 | [#25](https://github.com/cmudrc/engineering-design-skills/issues/25) |
 | Concept testing | 1 | [#26](https://github.com/cmudrc/engineering-design-skills/issues/26) |
-| Production ramp-up | 5 | [#27](https://github.com/cmudrc/engineering-design-skills/issues/27) |
 
 ## Interpreting the phases
 
 Concept testing belongs in Phase 1. Phase 4 evaluates more developed product versions; prototyping, benchmarking, and other methods can still be used earlier. A small prototype or an optimization model does not by itself establish that a project has reached a later phase.
 
-The process skill spans all phases. The current implementations emphasize concept and analytical design; production-specific coverage is still planned.
+The process skill spans all phases. Draft methods now support planning through production ramp-up. Cross-phase methods adapt to the decision and evidence available; their membership does not imply that every activity is appropriate at every development state.
 
 ## Source
 

@@ -34,12 +34,12 @@ Select a method because of the decision and artifact it supports. The same skill
 
 - **Phase 0:** opportunity identification, product planning, problem framing, needs research, and benchmarking support a bounded mission.
 - **Phase 1:** needs and specifications, benchmarking, functional modeling, morphological synthesis, analogy, TRIZ, screening, selection, and concept testing support concept development. Cycle between these activities as evidence changes.
-- **Phase 2:** architecture and interfaces, subsystem functional modeling, morphological synthesis, trade studies, and optimization formulation support allocation and integration choices.
+- **Phase 2:** architecture and interfaces, subsystem functional modeling, morphological synthesis, trade studies, optimization formulation, DFMA, and integration prototypes support allocation and integration choices.
 - **Phase 3:** optimization, robust design and tolerances, failure analysis, DFMA, and cost or environmental assessment support buildable detail decisions.
 - **Phase 4:** prototyping and experiments, benchmarking, failure analysis, robust design, and model revision support product testing and refinement.
 - **Phase 5:** production ramp-up, DFMA, quality and failure investigations, variation assessment, and early-production evaluation support production readiness.
 
-The repository initially implements `technical-benchmarking`, `morphological-synthesis`, and `design-optimization-formulation`. The other methods are planned. Use an available method skill when present; otherwise explain the method directly or recommend it as the next activity without claiming to invoke a missing capability. This process skill is independently usable.
+Available method skills are `product-planning`, `technical-benchmarking`, `morphological-synthesis`, `design-optimization-formulation`, `design-for-manufacture-assembly`, `prototyping-experimental-planning`, and `production-ramp-up`. Other methods listed above remain planned. Use an available method skill when present; otherwise explain the method directly or recommend it as the next activity without claiming to invoke a missing capability. This process skill is independently usable.
 
 ## Run a bounded iteration and review the handoff
 

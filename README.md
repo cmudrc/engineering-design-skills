@@ -4,7 +4,7 @@ An open library of agent skills for engineering design, maintained by the [Desig
 
 Engineering design involves choosing what problem to solve, generating alternatives, comparing evidence, and deciding what to learn next. This library packages those methods as reusable instructions with explicit inputs, engineering artifacts, and quality checks.
 
-**Status: initial scaffold.** Four draft skills establish the structure. The remaining methods are tracked as GitHub issues and mapped to phases 0–5 of Ulrich and Eppinger’s product-development process. The drafts include worked examples and structural checks; their effects on agent performance have not been evaluated.
+**Status: draft library.** Eight skills cover phases 0–5 of Ulrich and Eppinger’s product-development process. The remaining methods are tracked as GitHub issues. The drafts include worked examples and structural checks; their effects on agent performance have not been evaluated.
 
 **[Explore the demos on GitHub Pages](https://cmudrc.github.io/engineering-design-skills/)**. Each skill shows its complete example conversation in a scrollable chat window alongside the current instructions, output template, and worked example.
 
@@ -12,7 +12,7 @@ Engineering design involves choosing what problem to solve, generating alternati
 
 The library follows Ulrich and Eppinger’s six phases: **0 Planning, 1 Concept Development, 2 System-Level Design, 3 Detail Design, 4 Testing and Refinement, and 5 Production Ramp-Up**. Skills have many-to-many membership. The same method may support different decisions in several phases; using it does not by itself establish phase completion.
 
-`catalog.json` is the source of truth for phases, implemented skills, and planned methods. The [generated catalog](docs/skill-catalog.md) provides the complete mapping and attribution. The overall process skill spans all six phases; the current method implementations emphasize concept and analytical design.
+`catalog.json` is the source of truth for phases, implemented skills, and planned methods. The [generated catalog](docs/skill-catalog.md) provides the complete mapping and attribution. The overall process skill spans all six phases, with method skills supporting planning, concept development, design, testing, and production ramp-up.
 
 ## Starter skills
 
@@ -22,6 +22,10 @@ The library follows Ulrich and Eppinger’s six phases: **0 Planning, 1 Concept 
 | [Technical benchmarking](skills/technical-benchmarking/SKILL.md) | Compare existing engineering solutions using traceable, comparable evidence. | Benchmark matrix, comparability assessment, performance gaps, and opportunities. |
 | [Morphological synthesis](skills/morphological-synthesis/SKILL.md) | Combine solution principles for required functions into coherent concepts. | Morphological chart, compatibility assessment, and concept descriptions. |
 | [Design optimization formulation](skills/design-optimization-formulation/SKILL.md) | Translate an engineering decision into an explicit optimization problem. | Variables, objectives, constraints, models, assumptions, and formulation checks. |
+| [Product planning](skills/product-planning/SKILL.md) | Define the development mission and the next learning effort in Phase 0. | Mission statement, priorities, resource assumptions, and Phase 1 handoff. |
+| [Design for manufacture and assembly](skills/design-for-manufacture-assembly/SKILL.md) | Improve fabrication and assembly while preserving product function in Phases 2–5. | Operations review, comparative cost estimate, tradeoffs, and validation plan. |
+| [Prototyping and experimental planning](skills/prototyping-experimental-planning/SKILL.md) | Match prototype fidelity and experimental design to a decision in Phases 1–5. | Prototype purpose, controlled test plan, measurements, and interpretation limits. |
+| [Production ramp-up](skills/production-ramp-up/SKILL.md) | Evaluate early output from the intended production system in Phase 5. | Unit accounting, quality and flow evidence, corrective work, and next ramp decision. |
 
 The process skill provides a top-level entry point. Each method skill also works independently. Optimization formulation covers the reasoning and model definition that precede numerical search; a separate optimization and exploration skill is planned.
 

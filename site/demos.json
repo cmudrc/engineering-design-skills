@@ -94,5 +94,97 @@
         "assistant": "It is a useful candidate for learning, with important questions still open.\n\nThe energy budget does not predict whether the drinks stay below 10 °C. We still need payload-to-coolant thermal coupling, transient temperatures, actual geometry, pack volume, and measured heat leak.\n\n**Next action:** test an exploratory foam-and-ice mockup to improve the model. That can still be Phase 1 or 2 work. After architecture and details are resolved, **Phase 4** would test and refine a developed product version.\n\nThis formulation can also be reused in Phases 3 and 4, with more detailed geometry and evidence. Its phase membership depends on the decision it supports."
       }
     ]
+  },
+  {
+    "slug": "product-planning",
+    "title": "Product planning",
+    "short": "Turn a promising opportunity into a development mission.",
+    "turns": [
+      {
+        "user": "We might build a better cooler for our event crew. Is that even a project?",
+        "assistant": "It could be. **Phase 0: Planning** should clarify the opportunity and the effort worth committing before we settle on a product concept.\n\nWhat is difficult about the current setup, and who uses and buys it?"
+      },
+      {
+        "user": "The staff keep moving drinks between tables. The coolers are awkward to carry. The organizer buys them. I was thinking a thicker foam box.",
+        "assistant": "The opportunity is easier handling during service. A thicker foam box is one candidate, but it does not yet address the carrying problem.\n\nHere is a provisional mission:\n\n> Help event staff carry and serve chilled drinks between tables with less awkward handling.\n\n| Mission element | Current basis |\n|---|---|\n| Users | Staff moving and serving drinks |\n| Buyer | Event organizer |\n| Benefit | Easier handling while maintaining useful cooling |\n| Scope | Mobile service between tables |\n| Open choices | Container, carrying arrangement, coolant, and refill strategy |\n\nYour report supports investigating the problem. We still need observation to understand its causes and importance. What resources or timing commitments do you already have?"
+      },
+      {
+        "user": "We can use the workshop. No budget yet, and nobody has promised a date. Mostly wondering whether it is worth trying.",
+        "assistant": "Then I would propose a **small Phase 1 learning effort**, rather than a production commitment.\n\n1. Observe a service cycle and ask staff where carrying becomes difficult.\n2. Check the organizer’s priorities and include loading, cleaning, and storage needs.\n3. Benchmark the current equipment and develop contrasting concepts.\n\nThe mission can record workshop access as supplied, with its actual capabilities still to check. Budget, dates, payload, acceptable mass, and thermal conditions remain open.\n\n**Recommendation:** pursue this bounded investigation if the project owner supports it. This brief does not establish approval or demand outside your crew."
+      },
+      {
+        "user": "So we don’t need to choose the box yet?",
+        "assistant": "Correct. The planning output is a **development mission and learning questions**. The container architecture stays open for concept development.\n\nThe next decision is whether the observed handling problem warrants a development effort and what resources to commit to it. If the evidence changes the opportunity, revise the mission before committing further."
+      }
+    ]
+  },
+  {
+    "slug": "design-for-manufacture-assembly",
+    "title": "Design for manufacture and assembly",
+    "short": "Simplify production while preserving what the product must do.",
+    "turns": [
+      {
+        "user": "This lid takes forever to put together. Can we simplify it?",
+        "assistant": "Let’s find the assembly difficulty and the functions we need to preserve.\n\nWhat operations take the time, what holds the lid together, and roughly how many do you expect to make? A sketch or assembly sequence would help us assess access, alignment, and sealing."
+      },
+      {
+        "user": "Twelve little fasteners. We keep fiddling with them around the seal. We timed five lids: 176, 182, 180, 179 and 183 seconds. Maybe a hundred units, maybe a thousand.",
+        "assistant": "The measured mean is **180 seconds per lid**. The fiddling suggests handling, alignment, or access problems worth observing directly.\n\nBefore removing fasteners, map what each does: clamping the seal, carrying loads, locating parts, or allowing service. We could compare better access, standardized hardware, alignment features, or fewer captive fasteners.\n\nFor each alternative, we need its expected time, parts cost, tooling, and functional consequences. Have you estimated a specific change?"
+      },
+      {
+        "user": "Maybe four captive fasteners. We guessed 140 seconds, twelve cents less in parts, and a $260 fixture. Labor is $36 an hour.",
+        "assistant": "That gives us a **conditional cost comparison**. The 140-second cycle is still an estimate.\n\n```text\nLabor saving = (180 − 140) / 3600 × $36 = $0.40/unit\nRecurring saving = $0.40 + $0.12 = $0.52/unit\nNet saving at N units = $0.52N − $260\nBreak-even = 500 units\n```\n\n| Quantity | Predicted effect |\n|---|---|\n| 100 | $208 more cost |\n| 1,000 | $260 saving |\n\nThis includes only the supplied incremental fixture and recurring costs. Development, qualification, maintenance, scrap, and rework changes could alter the result. Also confirm whether saved labor time reduces cost or frees capacity."
+      },
+      {
+        "user": "Four fasteners sounds better then?",
+        "assistant": "It is a candidate to evaluate. Fewer fasteners change lid deflection and seal compression, so assembly savings could come with worse sealing or service access.\n\n**Next work:** review the lid geometry and load path, define the proposed revision, test sealing and service conditions, and measure assembly with the revised fixture. Keep the original timing data for comparison.\n\nThis review can guide **Phase 3** details and **Phase 4** validation. If adopted in **Phase 5**, carry the verified change into operator instructions and production checks. The skill also supports earlier **Phase 2** assembly-allocation decisions."
+      }
+    ]
+  },
+  {
+    "slug": "prototyping-experimental-planning",
+    "title": "Prototyping and experimental planning",
+    "short": "Build and measure what will resolve the next uncertainty.",
+    "turns": [
+      {
+        "user": "One cooler sample got warm early. What should we test next?",
+        "assistant": "First, what decision should the next test inform: choosing a concept, changing a detail, or freezing the design? And what differs between the samples?\n\nThat determines which features the prototype must represent and which comparison will tell us something useful."
+      },
+      {
+        "user": "We were hoping to freeze it. Three workshop builds, same geometry and materials. At six hours they were 9.4, 9.8 and 10.6 degrees. We said ten was the limit.",
+        "assistant": "Two units meet the stated six-hour criterion in those runs; one does not. That is useful evidence, but it does not establish a cause or population reliability.\n\nBefore choosing another build, check whether the tests used the same payload, coolant preparation, ambient conditions, lid position, and sensor placement. Are the lid assemblies interchangeable?"
+      },
+      {
+        "user": "Five liters, same ice-pack setup, closed lid, starting at four degrees in a thirty-degree room. The lids swap. Could we just use the two that passed?",
+        "assistant": "Keep the failed unit in the investigation. Selecting only the passing samples would hide the uncertainty behind the freeze decision.\n\nI’d propose this **Phase 4 learning plan**:\n\n| Step | Purpose | Records / controls |\n|---|---|---|\n| Check sensors against a common reference; review preparation and placement | Assess measurement and setup explanations | Calibration check, raw traces, coolant and ambient logs |\n| Test the coolest and warmest bodies with each compatible lid | See whether the difference follows a lid or a body | Body/lid IDs, revision, fixed protocol, recorded run order |\n| Repeat relevant combinations | Examine run-to-run variation | Preserve every result and any invalid-run reason |\n\nBalance or randomize run order where practical, and confirm that swapping lids does not change other interfaces. Repeated runs do not turn two bodies into a large independent sample."
+      },
+      {
+        "user": "What would we actually change after that?",
+        "assistant": "If the difference follows a lid, inspect seal compression and geometry, then test a specific corrective hypothesis. If it follows a body or remains inconsistent, revise the explanation before changing parts.\n\nKeep the **10 °C criterion fixed**, retain the original failure, and verify any correction across affected units and conditions. The small comparison can help locate a problem; it cannot demonstrate reliability.\n\nThis plan uses developed-product prototypes. Earlier concept mockups can use lower fidelity; **Phase 5** readiness requires evidence from the intended production system."
+      }
+    ]
+  },
+  {
+    "slug": "production-ramp-up",
+    "title": "Production ramp-up",
+    "short": "Use early production evidence to choose the next ramp step.",
+    "turns": [
+      {
+        "user": "We finally made a small batch. Can we make a lot more next week?",
+        "assistant": "Let’s look at what the batch demonstrated. **Phase 5: Production Ramp-Up** concerns the intended production system, including its operators, tooling, work instructions, and inspections.\n\nDid you use that process, how many units entered it, and what happened to each unit?"
+      },
+      {
+        "user": "Thirty, with the intended parts and fixtures, normal assembly route, trained operators. Twenty-four were fine. Four needed the seals fixed, then passed. Two had bad brackets and got scrapped. Nothing left on hold.",
+        "assistant": "The unit counts reconcile:\n\n```text\nInitial: 24 first-pass + 4 requiring rework + 2 scrap = 30\nFinal:   28 conforming + 2 scrap = 30\n```\n\n| Metric | Calculation | Result |\n|---|---|---|\n| First-pass yield | 24 / 30 | 80.0% |\n| Final conformance | (24 + 4) / 30 | 93.3% |\n| Scrap fraction | 2 / 30 | 6.7% |\n\nThe four reworked units are already included in the 28 finally conforming units. Their initial failures and extra labor still matter.\n\nWhat timing and staffing records do you have, and what criteria were set for increasing output?"
+      },
+      {
+        "user": "Haven’t pulled the timing yet. We didn’t really set criteria. Ninety-three percent sounds pretty good though. Maybe double the next lot?",
+        "assistant": "The final percentage alone does not support that increase. We do not yet know throughput, rework effort, or whether the seal and bracket problems will recur. It also does not establish stable capability or a capability index.\n\nI’d propose a **bounded corrective run**:\n\n- Trace the seal and bracket failures to units, parts, stations, fixtures, and revisions. Treat causes as hypotheses until checked.\n- Verify targeted changes with the intended process and current operator instructions.\n- Record elapsed time, staffing, rework effort, inspection results, and each unit’s final disposition.\n- Agree on readiness criteria tied to the actual output need before deciding on the next increase.\n\nKeep the proposed changes and unresolved problems visible in the ramp review."
+      },
+      {
+        "user": "So another learning batch first?",
+        "assistant": "That is my recommendation. Define the run by what it needs to demonstrate, then use its quality and flow evidence to choose the next step. The owner still makes the production decision.\n\nIf the bracket problem requires a design change, revisit the relevant detail-design work and track the new revision. Production ramp-up can expose earlier design decisions that need refinement."
+      }
+    ]
   }
 ]

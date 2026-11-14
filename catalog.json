@@ -256,7 +256,7 @@
         4,
         5
       ],
-      "status": "planned",
+      "status": "draft",
       "issue": 15
     },
     {
@@ -281,7 +281,7 @@
         4,
         5
       ],
-      "status": "planned",
+      "status": "draft",
       "issue": 17
     },
     {
@@ -373,7 +373,7 @@
       "phases": [
         0
       ],
-      "status": "planned",
+      "status": "draft",
       "issue": 25
     },
     {
@@ -391,7 +391,7 @@
       "phases": [
         5
       ],
-      "status": "planned",
+      "status": "draft",
       "issue": 27
     }
   ]
